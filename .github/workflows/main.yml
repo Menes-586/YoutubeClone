@@ -23,7 +23,7 @@ jobs:
 
     - name: Build the project
       run: |
-        CI='' npm run build
+        CI='' npm run build  # Uyarıları hata yapmasın
 
     - name: Deploy to Azure Static Web App
       uses: Azure/static-web-apps-deploy@v1
@@ -31,6 +31,6 @@ jobs:
         azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         action: "upload"
-        app_location: "/"
-        output_location: "build"
-        skip_app_build: true      # ✅ Bu satır çok önemli!
+        app_location: "build"         # ✅ Deploy edilecek dizin
+        output_location: ""           # ✅ Boş bırak çünkü build/ içinde zaten index.html var
+        skip_app_build: true          # ✅ Build'i biz yaptık
